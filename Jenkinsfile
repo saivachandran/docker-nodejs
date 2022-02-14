@@ -16,12 +16,17 @@ pipeline{
 		   }
 		}
 		
-	    stage('SonarQube analysis') {
-          def scannerHome = tool name: 'sonar_scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
-          withSonarQubeEnv('sonarcube') { 
-            sh "${scannerHome}/bin/sonar-scanner"
-          }
+		stage('SonarQube analysis') {
+          steps {
+            script {
+              // requires SonarQube Scanner 2.8+
+               scannerHome = tool 'SonarQube Scanner 4.6'
         }
+            withSonarQubeEnv('sonarcube') {
+               sh "${scannerHome}/bin/sonar-scanner"
+        }
+      }
+    }
     
 		stage('Build') {
 
