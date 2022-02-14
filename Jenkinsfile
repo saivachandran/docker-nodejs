@@ -18,10 +18,10 @@ pipeline{
 		
 	stage('SonarQube analysis') {
       tools {
-        sonarQube 'sonarcube-scanner 4.6.1.2450'
+        sonarQube 'SonarQube Scanner 4.6.1.2450'
       }
       steps {
-        withSonarQubeEnv('sonarcube-scanner') {
+        withSonarQubeEnv('SonarQube Scanner') {
          sh "${scannerHome}/bin/sonar-scanner"
         }
       }
