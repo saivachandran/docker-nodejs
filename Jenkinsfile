@@ -15,6 +15,19 @@ pipeline{
             
 		   }
 		}
+		
+		stage('SonarQube analysis') {
+          steps {
+            script {
+              // requires SonarQube Scanner 2.8+
+               scannerHome = tool 'SonarQube Scanner'
+        }
+            withSonarQubeEnv('sonarcube') {
+               sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='sonarcube-auth'"
+        }
+      }
+    }
+    
 		stage('Build') {
 
 			steps {
@@ -41,7 +54,7 @@ pipeline{
 		 stage('deploy application') {
 
 			steps {
-				sh 'docker run -p 49160:8080 -d chandransaiva/nodeapp:latest'
+				sh 'docker run -p 49161:8080 -d chandransaiva/nodeapp:latest'
 			}
 		}
 		
