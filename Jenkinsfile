@@ -7,7 +7,14 @@ pipeline{
 	}
 
 	stages {
-
+	
+	    stage('checkout') {
+           steps {
+             
+            git branch: 'dev', url: 'https://github.com/saivachandran/docker-nodejs.git'
+            
+		   }
+		}
 		stage('Build') {
 
 			steps {
@@ -29,6 +36,15 @@ pipeline{
 				sh 'docker push chandransaiva/nodeapp:latest'
 			}
 		}
+		
+		
+		 stage('deploy application') {
+
+			steps {
+				sh 'docker run -p 49160:8080 -d chandransaiva/nodeapp:latest'
+			}
+		}
+		
 	}
 
 	post {
