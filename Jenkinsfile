@@ -54,7 +54,7 @@ pipeline{
 		 stage('deploy application') {
 
 			steps {
-				sh 'docker run -p 49160:8080 -d chandransaiva/nodeapp:latest'
+				sh 'docker run -p 49161:8080 -d chandransaiva/nodeapp:latest'
 			}
 		}
 		
