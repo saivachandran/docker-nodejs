@@ -23,7 +23,7 @@ pipeline{
                scannerHome = tool 'SonarQube Scanner'
         }
             withSonarQubeEnv('sonarcube') {
-               sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sonarcube-auth)"
+               sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey='sonarcube-auth')"
         }
       }
     }
